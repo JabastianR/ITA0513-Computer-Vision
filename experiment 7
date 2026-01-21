@@ -1,0 +1,31 @@
+import cv2
+
+# Read captured video
+video = cv2.VideoCapture(r"C:\Users\cravi\Downloads\cvvideo.mp4")
+
+# Check if video opened successfully
+if not video.isOpened():
+    print("Error: Video file not found")
+    exit()
+
+print("Press 's' for slow motion, 'f' for fast motion, 'q' to quit")
+
+while True:
+    ret, frame = video.read()
+    if not ret:
+        break
+
+    cv2.imshow("Video Playback", frame)
+
+    # Default delay (normal speed)
+    key = cv2.waitKey(50) & 0xFF
+
+    if key == ord('s'):      # Slow motion
+        cv2.waitKey(120)
+    elif key == ord('f'):    # Fast motion
+        cv2.waitKey(5)
+    elif key == ord('q'):    # Quit
+        break
+
+video.release()
+cv2.destroyAllWindows()
